@@ -4,12 +4,12 @@ import pickle
 app = Flask(__name__)
 
 # Load the model
-model = pickle.load(open('C:\\Users\\kandula sai bhaskar\\Desktop\\amma\\saved_model.sav', 'rb'))
+model = pickle.load(open('iris-detection\saved_model.sav', 'rb'))
 
 @app.route('/')
 def home():
     result = ''
-    return render_template('index.html', **locals() )
+    return render_template('iris-detection\templates\index.html', **locals() )
 
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
@@ -18,7 +18,7 @@ def predict():
     PetalLengthCm = float(request.form['PetalLengthCm'])
     PetalWidthCm = float(request.form['PetalWidthCm'])
     result = model.predict([[SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm]])
-    return render_template('index.html', **locals())
+    return render_template('iris-detection\templates\index.html', **locals())
 
 if __name__ == '__main__':
     app.run(debug=True)
